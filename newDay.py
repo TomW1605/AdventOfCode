@@ -1,5 +1,6 @@
 import configparser
 import os
+import re
 import shutil
 
 import requests as requests
@@ -10,7 +11,7 @@ config.read('config.ini')
 folder = config['general']['year'] + " - " + config['general']['language']
 
 completedDays = next(os.walk(os.path.join('.', folder)))[1]
-completedDays.sort()
+completedDays.sort(key=lambda f: int(re.sub('\D', '', f)))
 if len(completedDays) > 0:
     dayNum = int(completedDays[-1].split(" ")[-1]) + 1
 else:
