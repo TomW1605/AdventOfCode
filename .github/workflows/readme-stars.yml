@@ -5,7 +5,7 @@ on:
     types:
       - completed
   schedule:
-    - cron: '26 14 1-25 12 *'  # Every 4 hours
+    - cron: '26 */4 1-26 12 *'  # Every 4 hours
   workflow_dispatch:
 
 jobs:
@@ -16,7 +16,6 @@ jobs:
       - uses: k2bd/advent-readme-stars@v1
         with:
           userId: 1200593
-          leaderboardId: 965021
           sessionCookie: ${{ secrets.AOC_SESSION }}
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
