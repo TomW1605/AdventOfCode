@@ -47,13 +47,13 @@ def part1and2(input_lines, steps):
         print(newPairs)
 
     letters = defaultdict(lambda: 0)
-    #{letter[0]: number if letter[0] in self.keys() else  for letter, number in pairs}
+    letters[template[-1]] = 1
     for letter in pairs:
         number = pairs[letter]
         letters[letter[0]] += number if number > 0 else 0
     print(dict(letters))
     elements = sorted(list(letters.values()))
-    print(elements[-1]-elements[0]+1)
+    print(elements[-1]-elements[0])
 
 if __name__ == '__main__':
     test = 0
