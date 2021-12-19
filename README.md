@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/day%20📅-18-blue) ![](https://img.shields.io/badge/days%20completed%20✔-16-darkgreen) ![](https://img.shields.io/badge/stars%20⭐-32-yellow)
+![](https://img.shields.io/badge/day%20📅-19-blue) ![](https://img.shields.io/badge/days%20completed%20✔-16-darkgreen) ![](https://img.shields.io/badge/stars%20⭐-32-yellow)
 
 <!--- advent_readme_stars table --->
 ## 2021 Results
