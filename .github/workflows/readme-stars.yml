@@ -13,10 +13,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: k2bd/advent-readme-stars@v1
+      - uses: TomW1605/advent-readme-stars@v1
         with:
           userId: 1200593
           sessionCookie: ${{ secrets.AOC_SESSION }}
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: Update README stars
+          commit_message: Update AoC Stars
