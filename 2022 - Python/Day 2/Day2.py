@@ -1,10 +1,6 @@
 from readFile import readFile
 
 
-def convert(round_list):
-    return [["r" if round.split(" ")[0] == "A" else "p" if round.split(" ")[0] == "B" else "s", "r" if round.split(" ")[1] == "X" else "p" if round.split(" ")[1] == "Y" else "s"] for round in round_list]
-
-
 def calculate_score(round):
     score = 0
 
