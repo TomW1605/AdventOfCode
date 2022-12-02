@@ -1,7 +1,3 @@
-import sys
-
-print(sys.path)
-
 from readFile import readFile
 
 
@@ -32,6 +28,7 @@ def part2(input_lines):
     elves.sort(reverse=True)
     print(elves)
     print(sum(elves[:3]))
+
 
 if __name__ == '__main__':
     test = 0
