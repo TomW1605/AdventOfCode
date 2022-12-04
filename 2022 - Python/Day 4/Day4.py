@@ -10,8 +10,8 @@ def part1(input_lines):
         elf1 = elf1.split("-")
         elf2 = elf2.split("-")
 
-        elf1 = [*range(int(elf1[0]), int(elf1[1])+1)]
-        elf2 = [*range(int(elf2[0]), int(elf2[1])+1)]
+        elf1 = range(int(elf1[0]), int(elf1[1])+1)
+        elf2 = range(int(elf2[0]), int(elf2[1])+1)
 
         if all(x in elf1 for x in elf2) or all(x in elf2 for x in elf1):
             total += 1
@@ -30,8 +30,8 @@ def part2(input_lines):
         elf1 = elf1.split("-")
         elf2 = elf2.split("-")
 
-        elf1 = [*range(int(elf1[0]), int(elf1[1])+1)]
-        elf2 = [*range(int(elf2[0]), int(elf2[1])+1)]
+        elf1 = range(int(elf1[0]), int(elf1[1])+1)
+        elf2 = range(int(elf2[0]), int(elf2[1])+1)
 
         if any(x in elf1 for x in elf2) or any(x in elf2 for x in elf1):
             total += 1
