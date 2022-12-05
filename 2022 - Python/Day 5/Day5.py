@@ -12,6 +12,7 @@ def readFile(file):
 
 class Crate:
     crate_below = None
+    crate_above = None
     crate_ID = ''
 
     def __init__(self, ID):
@@ -44,10 +45,19 @@ class Stack:
 
     def add_crate(self, crate: Crate):
         crate.crate_below = self.top_crate
-        self.top_crate = crate
+
+        if self.top_crate:
+            self.top_crate.crate_above = crate
+
+        new_top = crate
+        while new_top.crate_above is not None:
+            new_top = new_top.crate_above
+        self.top_crate = new_top
 
     def remove_crate(self, crate: Crate):
         self.top_crate = crate.crate_below
+        if self.top_crate:
+            self.top_crate.crate_above = None
 
     def select_crate(self, num):
         ii = 1
@@ -76,9 +86,7 @@ class Move:
         return self.__str__()
 
 
-def part1(input_lines):
-    print(input_lines)
-
+def make_stacks(input_lines):
     stack_input = []
     for line in input_lines.split('\n'):
         if line == "":
@@ -100,6 +108,14 @@ def part1(input_lines):
                 crate = Crate(crates_on_row[ii])
                 stacks[ii].add_crate(crate)
 
+    return stacks
+
+
+def part1(input_lines):
+    print(input_lines)
+
+    stacks = make_stacks(input_lines)
+
     #print(stacks)
 
     moves = re.findall(r"move (\d+?) from (\d+?) to (\d+?)", input_lines)
@@ -117,13 +133,30 @@ def part1(input_lines):
     for stack in stacks:
         print(stack.top_crate, end="")
 
+
 def part2(input_lines):
     print(input_lines)
+
+    stacks = make_stacks(input_lines)
+
+    #print(stacks)
+
+    moves = re.findall(r"move (\d+?) from (\d+?) to (\d+?)", input_lines)
+    for move in moves:
+        move = Move(move)
+
+        crate = stacks[move.start].select_crate(move.number)
+        stacks[move.start].remove_crate(crate)
+        stacks[move.end].add_crate(crate)
+
+    #print(stacks)
+    for stack in stacks:
+        print(stack.top_crate, end="")
 
 
 if __name__ == '__main__':
     test = 0
-    part = 1
+    part = 2
 
     if test:
         inputLines = readFile("testInput.txt")
