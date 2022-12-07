@@ -8,7 +8,7 @@ class File:
 
     def __init__(self, name, size):
         self.name = name
-        self.size = size
+        self.size = int(size)
 
     def __str__(self):
         #return self.name
@@ -30,19 +30,46 @@ class File:
 class Folder(list):
     name = ""
     parent = None
+    size = 0
 
     def __init__(self, name):
         super().__init__()
         self.name = name
 
     def add_item(self, item):
+        if isinstance(item, File):
+            self.size += item.size
+            if self.parent:
+                self.parent.add_size(item.size)
         self.append(item)
 
     def remove_item(self, item):
+        if isinstance(item, File):
+            self.size -= item.size
+            if self.parent:
+                self.parent.remove_size(item.size)
         self.remove(item)
+
+    def add_size(self, size):
+        self.size += size
+        if self.parent:
+            self.parent.add_size(size)
+
+    def remove_size(self, size):
+        self.size -= size
+        if self.parent:
+            self.parent.remove_size(size)
 
     def set_parent(self, parent):
         self.parent = parent
+
+    def get_folders(self):
+        folders = [self]
+        for item in self:
+            if isinstance(item, Folder):
+                folders += item.get_folders()
+
+        return folders
 
     def __str__(self):
         """return_str = f"{self.name}["
@@ -52,7 +79,7 @@ class Folder(list):
 
         return return_str"""
 
-        return_str = f"- {self.name} (dir)\n"
+        return_str = f"- {self.name} (dir, size={self.size})\n"
         for item in self:
             if isinstance(item, Folder):
                 sub_return_str = f"{item.__str__()}\n"
@@ -66,7 +93,7 @@ class Folder(list):
         return return_str
 
     def __repr__(self):
-        return f"{self.name} (dir)"
+        return f"{self.name} (dir, size={self.size})"
 
     def __eq__(self, other):
         if isinstance(other, str):
@@ -77,8 +104,6 @@ class Folder(list):
 
         return False
 
-    """def __contains__(self, item):
-        return item in self"""
 
 def build_file_tree(input_lines):
     root = Folder("/")
@@ -94,11 +119,6 @@ def build_file_tree(input_lines):
                 current_folder = current_folder.parent
             else:
                 current_folder = current_folder[current_folder.index(line[5:])]
-
-            """if new_folder in current_folder:
-                current_folder.add_item(new_folder)
-            else:
-                current_folder = new_folder"""
 
         elif line.startswith("dir "):
             new_folder = Folder(line[4:])
@@ -116,15 +136,36 @@ def build_file_tree(input_lines):
 
 def part1(input_lines):
     print(input_lines)
-    folder_tree = build_file_tree(input_lines)
-    print(folder_tree)
+    root_folder = build_file_tree(input_lines)
+    print(root_folder.get_folders())
+
+    total = 0
+    for sub_folder in root_folder.get_folders():
+        if sub_folder.size <= 100000:
+            total += sub_folder.size
+
+    print(total)
 
 def part2(input_lines):
     print(input_lines)
+    root_folder = build_file_tree(input_lines)
+    print(root_folder.get_folders())
+
+    total_fs = 70000000
+    needed = 30000000
+    free = total_fs-root_folder.size
+
+    options = []
+    for sub_folder in root_folder.get_folders():
+        if free + sub_folder.size >= needed:
+            options.append(sub_folder.size)
+
+    options.sort()
+    print(options[0])
 
 if __name__ == '__main__':
-    test = 1
-    part = 1
+    test = 0
+    part = 2
 
     if test:
         inputLines = readFile("testInput.txt")
