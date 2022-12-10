@@ -58,7 +58,8 @@ def gen_grid(cur_knots: list[Knot], visited: set[tuple[int, int]], max_point, mi
                 line.append(".")
                 #print(".", end="")
         grid.append(line)
-        #print(line)
+        print("".join(line))
+    print()
     return grid
 
 
@@ -70,14 +71,14 @@ def print_grid(grid, scale_percent: int = 1000, show_only: bool = True, pad_widt
     img_array = np.zeros([height - pad_width * 2, width - pad_width * 2, 3])
     for row in range(pad_width, height - pad_width):
         for col in range(pad_width, width - pad_width):
-            colour = 'green'
-            pix_colour = [0, 1, 0]
+            colour = 'red'
+            pix_colour = [0, 0, 1]
             if grid[row][col] == "H":
+                colour = 'green'
+                pix_colour = [0, 1, 0]
+            if grid[row][col] in ["1", "2", "3", "4", "5", "6", "7", "8", "9", "T"]:
                 colour = 'blue'
                 pix_colour = [1, 0, 0]
-            if grid[row][col] in ["1", "2", "3", "4", "5", "6", "7", "8", "9"]:
-                colour = 'red'
-                pix_colour = [0, 0, 1]
             if grid[row][col] in ["#", "s"]:
                 colour = 'lightblue'
                 pix_colour = [1, 0.7, 0]
@@ -133,7 +134,8 @@ def part_1_and_2(input_lines, knots):
 
     print_grid(gen_grid(knots, visited, max_point, min_point))
 
-    for jj in tqdm(range(0, len(input_lines)), leave=False, unit="moves", unit_scale=False):
+    #for jj in tqdm(range(0, len(input_lines)), leave=False, unit="moves", unit_scale=False):
+    for jj in range(0, len(input_lines)):
         line = input_lines[jj]
         direction, distance = line.split()
         for _ in range(int(distance)):
@@ -146,8 +148,8 @@ def part_1_and_2(input_lines, knots):
             elif direction == "D":
                 knots[0].y -= 1
 
-            #print(knots)
-            #print_grid(knots, max_point, min_point)
+            print(line)
+            print_grid(gen_grid(knots, visited, max_point, min_point))
             tqdm(range(1, len(knots)), leave=False, unit="fish", unit_scale=True)
             for ii in range(1, len(knots)):
                 if not adjacent(knots[ii-1], knots[ii]):
@@ -170,7 +172,7 @@ def part_1_and_2(input_lines, knots):
                     if ii == len(knots)-1:
                         visited.add((knots[ii].x, knots[ii].y))
 
-        print_grid(gen_grid(knots, visited, max_point, min_point))
+                    print_grid(gen_grid(knots, visited, max_point, min_point))
         #print(visited)
         #print()
 
@@ -178,7 +180,7 @@ def part_1_and_2(input_lines, knots):
 
 
 if __name__ == '__main__':
-    test = 0
+    test = 1
     part = 2
 
     if test:
