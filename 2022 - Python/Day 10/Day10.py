@@ -51,7 +51,7 @@ def part2(input_lines):
     crt_pos = 0
     for instruction in instructions:
         if crt_pos in [x-1, x, x+1]:
-            print("#", end="")
+            print("█", end="")
         else:
             print(" ", end="")
 
