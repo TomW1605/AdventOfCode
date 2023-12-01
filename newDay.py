@@ -10,6 +10,8 @@ config.read('config.ini')
 
 folder = config['general']['year'] + " - " + config['general']['language']
 
+os.makedirs(os.path.join('.', folder), exist_ok=True)
+
 completedDays = next(os.walk(os.path.join('.', folder)))[1]
 completedDays.sort(key=lambda f: int(re.sub('\D', '', f)))
 if len(completedDays) > 0:
