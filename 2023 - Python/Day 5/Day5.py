@@ -77,7 +77,7 @@ def part2(input_lines):
 
     for ii in range(0, len(seed_ranges), 2):
         seeds += list(range(seed_ranges[ii], seed_ranges[ii]+seed_ranges[ii+1]))
-    print(seeds)
+    print("seeds")
 
     maps = {'seed_soil': [], 'soil_fertilizer': [], 'fertilizer_water': [], 'water_light': [], 'light_temperature': [],
         'temperature_humidity': [], 'humidity_location': []}
@@ -115,9 +115,9 @@ def part2(input_lines):
                               # range(output_range_start, output_range_start + range_len),
                               output_range_start - input_range_start))
 
-    print(maps)
+    print("maps")
 
-    print(seeds)
+    # print(seeds)
 
     for map_name, map_values in maps.items():
         print(map_name)
