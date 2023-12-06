@@ -43,7 +43,7 @@ def part2(input_lines):
 
 
 if __name__ == '__main__':
-    test = 1
+    test = 0
     part = 2
 
     if test:
