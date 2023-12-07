@@ -33,4 +33,4 @@ if __name__ == '__main__':
     minutes = int(total_time / 60)
     seconds = total_time % 60
 
-    print(f"{str(hours).zfill(2)}:{str(minutes).zfill(2)}:{seconds:06.3f}")
+    print(f"{hours:02.0f}:{minutes:02.0f}:{seconds:06.3f}")
