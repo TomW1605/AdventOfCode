@@ -16,13 +16,15 @@ class Hand:
         '5': 5,
         '4': 4,
         '3': 3,
-        '2': 2
+        '2': 2,
+        'W': 1
     }
 
-    def __init__(self, cards: list[str], bid: int):
+    def __init__(self, cards: str, bid: int):
         self.cards = cards
         self.card_values = [self.card_map[card] for card in self.cards]
         self.bid = bid
+        self.calculate_wildcard()
         self.strength = self.calculate_strength()
 
     def __str__(self):
@@ -50,6 +52,13 @@ class Hand:
         for ii in range(5):
             if other.card_values[ii] != self.card_values[ii]:
                 return other.card_values[ii] > self.card_values[ii]
+
+    def calculate_wildcard(self):
+        if 'W' in self.cards and self.cards != 'WWWWW':
+            card_set = set(self.cards)
+            card_counts = {card: self.cards.count(card) for card in card_set if card != 'W'}
+            best_card = max(card_counts, key=card_counts.get)
+            self.cards = self.cards.replace('W', best_card)
 
     def calculate_strength(self):
         card_set = set(self.cards)
@@ -104,10 +113,20 @@ def part1(input_lines):
 def part2(input_lines):
     print(input_lines)
 
+    hands = [Hand(line.split(' ')[0].replace('J', 'W'), int(line.split(' ')[1])) for line in input_lines]
+    print(hands)
+
+    hands = sorted(hands, reverse=True)
+
+    total = 0
+    for ii in range(len(hands)):
+        total += hands[ii].bid * (ii+1)
+    print(total)
+
 
 if __name__ == '__main__':
     test = 0
-    part = 1
+    part = 2
 
     start_time = time.time()
 
