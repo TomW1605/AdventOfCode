@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/day%20📅-25-blue) ![](https://img.shields.io/badge/days%20completed%20✔-15-darkgreen) ![](https://img.shields.io/badge/stars%20⭐-31-yellow)
+![](https://img.shields.io/badge/day%20📅-26-blue) ![](https://img.shields.io/badge/days%20completed%20✔-15-darkgreen) ![](https://img.shields.io/badge/stars%20⭐-31-yellow)
 
 <!--- advent_readme_stars table --->
 ## 2023 Results
