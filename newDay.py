@@ -25,14 +25,14 @@ if dayNum > 25:
 
 response = requests.get("https://adventofcode.com/"+config['general']['year']+"/day/"+str(dayNum)+"/input", cookies={"session": config['general']['sessionID']})
 if "unlocks" not in response.text:
-    os.mkdir(os.path.join(folder, f"Day {12:02d}"))
+    os.mkdir(os.path.join(folder, f"Day {dayNum:02d}"))
 
-    with open(os.path.join(folder, f"Day {12:02d}", "input.txt"), "w") as inputFile:
+    with open(os.path.join(folder, f"Day {dayNum:02d}", "input.txt"), "w") as inputFile:
         inputFile.write(response.text)
 
-    with open(os.path.join(folder, f"Day {12:02d}", "testInput.txt"), "w") as testInputFile:
+    with open(os.path.join(folder, f"Day {dayNum:02d}", "testInput.txt"), "w") as testInputFile:
         testInputFile.write("")
 
-    shutil.copyfile(os.path.join(folder, "template."+config['general']['extension']), os.path.join(folder, f"Day {12:02d}", f"Day{12:02d}.{config['general']['extension']}"))
+    shutil.copyfile(os.path.join(folder, "template."+config['general']['extension']), os.path.join(folder, f"Day {dayNum:02d}", f"Day{dayNum:02d}.{config['general']['extension']}"))
 else:
     print("please wait until the challenge has unlocked")
