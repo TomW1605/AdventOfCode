@@ -6,7 +6,6 @@ directions = [(0, 1), (1, 0), (0, -1), (-1, 0), (1, 1), (1, -1), (-1, 1), (-1, -
 
 def part1(input_lines):
     grid = [list(line) for line in input_lines]
-    # result_grid = [["."]*len(grid[0])]*len(grid)
     result_grid = [['.']*len(grid[0]) for _ in range(len(grid))]
     count = 0
     for ii in range(len(grid)):
@@ -29,11 +28,26 @@ def part1(input_lines):
     print(count)
 
 def part2(input_lines):
-    print(input_lines)
+    grid = [list(line) for line in input_lines]
+    count = 0
+    for ii in range(1, len(grid) - 1):
+        for jj in range(1, len(grid[ii]) - 1):
+            if grid[ii][jj] == 'A':
+                if (
+                        (
+                                (grid[ii - 1][jj - 1] == 'M' and grid[ii + 1][jj + 1] == 'S') or
+                                (grid[ii - 1][jj - 1] == 'S' and grid[ii + 1][jj + 1] == 'M')
+                        ) and (
+                                (grid[ii - 1][jj + 1] == 'M' and grid[ii + 1][jj - 1] == 'S') or
+                                (grid[ii - 1][jj + 1] == 'S' and grid[ii + 1][jj - 1] == 'M')
+                        )
+                ):
+                    count += 1
+    print(count)
 
 if __name__ == '__main__':
     test = 0
-    part = 1
+    part = 2
 
     start_time = time.time()
 
