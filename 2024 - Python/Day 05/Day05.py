@@ -78,9 +78,9 @@ if __name__ == '__main__':
     start_time = time.time()
 
     if test:
-        inputLines = readFile("testInput.txt")
+        inputLines = open("testInput.txt", "r").read().splitlines()
     else:
-        inputLines = readFile("input.txt")
+        inputLines = open("input.txt", "r").read().splitlines()
 
     if part == 1:
         part1(inputLines)
