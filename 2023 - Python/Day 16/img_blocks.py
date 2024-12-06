@@ -25,6 +25,7 @@ class Block:
         [S, S, S, S, S, S, S, S],
         [S, S, S, S, S, S, S, S],
     ]).astype(np.uint8)[:, :, :3]
+
     class Empty:
         NONE = np.array([
             [B, B, B, B, B, B, B, B],

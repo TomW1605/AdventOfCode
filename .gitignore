@@ -6,3 +6,7 @@
 /.idea/
 
 # media files
+*.jpg
+*.jpeg
+*.png
+*.mp4
