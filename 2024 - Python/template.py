@@ -1,7 +1,5 @@
 import time
 
-from readFile import readFile
-
 def part1(input_lines):
     print(input_lines)
 
