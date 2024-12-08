@@ -1,4 +1,4 @@
-![](https://img.shields.io/badge/day%20📅-7-blue) ![](https://img.shields.io/badge/days%20completed%20✔-5-darkgreen) ![](https://img.shields.io/badge/stars%20⭐-11-yellow)
+![](https://img.shields.io/badge/day%20📅-8-blue) ![](https://img.shields.io/badge/days%20completed%20✔-5-darkgreen) ![](https://img.shields.io/badge/stars%20⭐-11-yellow)
 
 <!--- advent_readme_stars table --->
 ## 2024 Results
