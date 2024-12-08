@@ -1,7 +1,5 @@
 import itertools
-import math
 import time
-from itertools import count
 
 class Antenna:
     def __init__(self, x, y, freq):
@@ -23,15 +21,6 @@ class Space:
     def __init__(self, contents):
         self.contents = contents
 
-    # @property
-    # def contents(self):
-    #     return self._contents
-    #
-    # @contents.setter
-    # def contents(self, value):
-    #     if self._contents == ".":
-    #         self._contents = value
-
     def __str__(self):
         if isinstance(self.contents, Antenna):
             return self.contents.freq
@@ -47,7 +36,6 @@ def part1(input_lines):
     for yy in range(len(input_lines)):
         row = []
         for xx in range(len(input_lines[yy])):
-            antenna = "."
             if input_lines[yy][xx] != '.':
                 antenna = Antenna(xx, yy, input_lines[yy][xx])
                 if antenna.freq not in antennas:
@@ -96,7 +84,6 @@ def part2(input_lines):
     for yy in range(len(input_lines)):
         row = []
         for xx in range(len(input_lines[yy])):
-            antenna = "."
             if input_lines[yy][xx] != '.':
                 antenna = Antenna(xx, yy, input_lines[yy][xx])
                 if antenna.freq not in antennas:
