@@ -4,14 +4,18 @@ class Colour:
     BLACK = [0, 0, 0, 255]
     SILVER = [180, 180, 180, 255]
     YELLOW = [0, 242, 255, 255]
-    RED = [239, 183, 0, 255]
+    RED = [0, 0, 255, 255]
     CLEAR = [0, 0, 0, 0]
+    LIGHT_BLUE = [239, 183, 0, 255]
+    GREEN = [0, 255, 0, 255]
 
 B = Colour.BLACK
 S = Colour.SILVER
 Y = Colour.YELLOW
-R = Colour.SILVER
+R = Colour.RED
 C = Colour.CLEAR
+L = Colour.LIGHT_BLUE
+G = Colour.GREEN
 
 class Block:
     WALL = np.array([
@@ -20,6 +24,14 @@ class Block:
         [S, S, S, S, S],
         [S, S, S, S, S],
         [S, S, S, S, S],
+    ]).astype(np.uint8)[:, :, :3]
+
+    OBSTACLE = np.array([
+        [R, R, R, R, R],
+        [R, R, R, R, R],
+        [R, R, R, R, R],
+        [R, R, R, R, R],
+        [R, R, R, R, R],
     ]).astype(np.uint8)[:, :, :3]
 
     class Empty:
@@ -63,13 +75,13 @@ class Block:
             [C, C, C, C, C],
         ]).astype(np.uint8)
 
-    # GUARD = np.array([
-    #     [C, C, C, C, C],
-    #     [C, C, C, C, C],
-    #     [C, C, R, C, C],
-    #     [C, C, C, C, C],
-    #     [C, C, C, C, C],
-    # ]).astype(np.uint8)
+    GUARD = np.array([
+        [C, C, C, C, C],
+        [C, C, C, C, C],
+        [C, C, G, C, C],
+        [C, C, C, C, C],
+        [C, C, C, C, C],
+    ]).astype(np.uint8)
     #
     # class Guard:
     #     UP = np.array([
