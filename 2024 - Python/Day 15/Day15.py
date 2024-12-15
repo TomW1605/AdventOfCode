@@ -1,5 +1,8 @@
 import time
 
+import cv2
+import numpy as np
+
 def move_bot(grid, bot, move):
     y, x = bot
     dy, dx = move
@@ -17,6 +20,22 @@ def move_bot(grid, bot, move):
         return grid, (y + dy, x + dx)
     return grid, bot
 
+def draw_grid(grid, scale_factor, wait = 0):
+    image = np.zeros((len(grid), len(grid[0]), 3), dtype=np.uint8)
+    for ii in range(len(grid)):
+        for jj in range(len(grid[0])):
+            if grid[ii][jj] == "O":
+                image[ii][jj] = (19, 70, 140)
+            elif grid[ii][jj] == "#":
+                image[ii][jj] = (180, 180, 180)
+            elif grid[ii][jj] == ".":
+                image[ii][jj] = (0, 0, 0)
+            elif grid[ii][jj] == "@":
+                image[ii][jj] = (0, 0, 255)
+    scaled_image = cv2.resize(image, (len(grid) * scale_factor, len(grid[0]) * scale_factor), interpolation=cv2.INTER_NEAREST)
+    cv2.imshow(f"Warehouse", scaled_image)
+    cv2.waitKey(wait)
+
 def part1(input_lines):
     input_text = "\n".join(input_lines)
     grid_text, moves = input_text.split("\n\n")
@@ -30,7 +49,7 @@ def part1(input_lines):
     print(bot)
 
     # print("Initial state:")
-    print("".join(["".join(row) + "\n" for row in grid]), end="\n")
+    print("".join(["".join(row) + "\n" for row in grid]))
     for move in moves:
         # print(f"Move {move}:")
         match move:
@@ -43,7 +62,8 @@ def part1(input_lines):
             case ">":
                 grid, bot = move_bot(grid, bot, (0, 1))
 
-    print("".join(["".join(row) + "\n" for row in grid]), end="\n")
+        print("".join(["".join(row) + "\n" for row in grid]))
+        # draw_grid(grid, 10, 1)
 
     total = 0
     for ii in range(len(grid)):
