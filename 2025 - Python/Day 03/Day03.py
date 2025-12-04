@@ -16,9 +16,24 @@ def part1(input_lines):
 def part2(input_lines):
     print(input_lines)
 
+    total_len = 12
+    total = 0
+    # for bank in input_lines:
+    for bank in tqdm(input_lines, unit="bank"):
+        bank = [int(battery) for battery in bank]
+        value = ""
+        search_index = 0
+        while search_index < len(bank) and len(value) < total_len:
+            search_index = bank.index(max(bank[search_index:len(bank) + len(value) - total_len + 1]), search_index)
+            value += str(bank[search_index])
+            search_index += 1
+        total += int(value)
+
+    print(total)
+
 if __name__ == '__main__':
     test = 0
-    part = 1
+    part = 2
 
     start_time = time.time()
 
