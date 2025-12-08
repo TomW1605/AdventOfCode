@@ -22,9 +22,34 @@ def part1(input_lines):
 def part2(input_lines):
     print(input_lines)
 
+    input_lines = [list(line) for line in input_lines]
+
+    numbers = [*zip(*input_lines)]
+
+    total = 0
+    problem_total = 0
+    problem_operator = None
+    for number in numbers:
+        if all([x == " " for x in number]):
+            continue
+
+        if number[-1] == "*":
+            total += problem_total
+            problem_total = 1
+            problem_operator = operator.mul
+        elif number[-1] == "+":
+            total += problem_total
+            problem_total = 0
+            problem_operator = operator.add
+        number_int = int("".join(number[:-1]))
+        problem_total = problem_operator(problem_total, number_int)
+
+    total += problem_total
+    print(total)
+
 if __name__ == '__main__':
     test = 0
-    part = 1
+    part = 2
 
     start_time = time.time()
 
