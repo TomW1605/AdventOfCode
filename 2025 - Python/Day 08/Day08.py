@@ -76,9 +76,33 @@ def part1(input_lines, iterations):
 def part2(input_lines):
     print(input_lines)
 
+    nodes = [Node(x, y, z) for x, y, z in (map(int, line.split(',')) for line in input_lines)]
+    print(nodes)
+
+    circuits = [Circuit([node]) for node in nodes]
+    print(circuits)
+
+    distances = [(pair[0].distance(pair[1]), pair) for pair in itertools.combinations(nodes, 2)]
+    distances.sort()
+    print(distances)
+
+    ii = 0
+    while len(circuits) > 1:
+        distance, (node1, node2) = distances[ii]
+        if node1.circuit == node2.circuit:
+            ii += 1
+            continue
+
+        circuits.remove(node1.circuit)
+        circuits.remove(node2.circuit)
+        circuits.append(node1.circuit.merge(node2.circuit))
+        ii += 1
+
+    print(node1.x * node2.x)
+
 if __name__ == '__main__':
     test = 0
-    part = 1
+    part = 2
 
     start_time = time.time()
 
